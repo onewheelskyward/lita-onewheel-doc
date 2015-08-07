@@ -14,6 +14,13 @@ module Lita
         redis.set(key, value)
         response.reply "Documented #{key} as #{value}"
       end
+
+      def fetch_key(response)
+        key = response.matches[0][0]
+
+        value = redis.get(key)
+        response.reply value
+      end
     end
 
     Lita.register_handler(OnewheelDoc)
