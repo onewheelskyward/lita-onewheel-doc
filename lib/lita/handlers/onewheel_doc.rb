@@ -22,8 +22,20 @@ module Lita
       def fetch_key(response)
         key = response.matches[0][0]
 
-        value = redis.hget(REDIS_KEY, key)
-        response.reply value
+        reply = redis.hget(REDIS_KEY, key)
+
+        # If we didn't find an exact key, perform a substring match
+        if reply.nil?
+          values = []
+          all = redis.hgetall(REDIS_KEY)
+          all.each do |all_key, all_val|
+            if all_key =~ /^#{key}/
+              values.push "#{all_key}: #{all_val}"
+            end
+          end
+          reply = values.join "\n"
+        end
+        response.reply reply
       end
 
       def list_keys(response)
