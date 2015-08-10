@@ -16,4 +16,8 @@ describe Lita::Handlers::OnewheelDoc, lita_handler: true do
     send_command 'doc'
     expect(replies.last).to eq("one: http://one\ntwo: http://two")
   end
+  it 'documents real urls' do
+    send_command 'doc pachinko-endpoints https://shopigniter.atlassian.net/wiki/display/I5/Pachinko+Endpoints'
+    expect(replies.last).to eq('Documented pachinko-endpoints as https://shopigniter.atlassian.net/wiki/display/I5/Pachinko+Endpoints')
+  end
 end

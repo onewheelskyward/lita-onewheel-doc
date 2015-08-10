@@ -3,7 +3,7 @@ module Lita
     class OnewheelDoc < Handler
       REDIS_KEY = 'onewheel-doc'
 
-      route /^doc\s+(\w+)\s+(.*)$/, :add_key, command: true,
+      route /^doc\s+([\w\/+_-]+)\s+(.*)$/, :add_key, command: true,
           help: '!doc key_val http://     Add a key using key_val and the http link'
       route /^doc$/, :list_keys, command: true,
           help: '!doc                     list all keys'
