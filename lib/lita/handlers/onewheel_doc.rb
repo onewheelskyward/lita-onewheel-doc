@@ -3,6 +3,8 @@ module Lita
     class OnewheelDoc < Handler
       REDIS_KEY = 'onewheel-doc'
 
+      route /^docdel\s+([\w\/+_-]+)$/, :del_key, command: true,
+          help: '!docdel key              removes a key'
       route /^doc\s+([\w\/+_-]+)\s+(.*)$/, :add_key, command: true,
           help: '!doc key_val http://     Add a key using key_val and the http link'
       route /^doc$/, :list_keys, command: true,
@@ -32,6 +34,12 @@ module Lita
           replies.push "#{key}: #{val}"
         end
         response.reply replies.join "\n"
+      end
+
+      def del_key(response)
+        key = response.matches[0][0]
+        y = redis.hdel(REDIS_KEY, key)
+        response.reply "Document deleted: #{key}"
       end
     end
 

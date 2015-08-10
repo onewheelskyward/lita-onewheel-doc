@@ -20,4 +20,9 @@ describe Lita::Handlers::OnewheelDoc, lita_handler: true do
     send_command 'doc pachinko-endpoints https://shopigniter.atlassian.net/wiki/display/I5/Pachinko+Endpoints'
     expect(replies.last).to eq('Documented pachinko-endpoints as https://shopigniter.atlassian.net/wiki/display/I5/Pachinko+Endpoints')
   end
+  it 'deletes documents' do
+    send_command 'doc one http://one'
+    send_command 'docdel one'
+    expect(replies.last).to eq('Document deleted: one')
+  end
 end
