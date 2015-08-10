@@ -6,19 +6,19 @@ module Lita
       route /^docdel\s+([\w\/+_-]+)$/,
             :command_del_key,
             command: true,
-            help: '!docdel key              removes a key'
+            help: {'!docdel key     ' => 'removes a key'}
       route /^doc\s+([\w\/+_-]+)\s+(.*)$/,
             :command_add_key,
             command: true,
-            help: '!doc key_val http://     Add a key using key_val and the http link'
+            help: {'!doc key http://' => 'Add a key using key_val and the http link'}
       route /^doc$/,
             :command_list_keys,
             command: true,
-            help: '!doc                     list all keys'
+            help: {'!doc            ' => 'list all keys'}
       route /^doc\s+(\w+)$/,
             :command_fetch_key,
             command: true,
-            help: '!doc key_val             fetch the value for key_val'
+            help: {'!doc key        ' => 'fetch the value for key_val'}
 
       def command_add_key(response)
         key = response.matches[0][0]

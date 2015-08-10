@@ -36,4 +36,5 @@ describe Lita::Handlers::OnewheelDoc, lita_handler: true do
     send_command 'doc pac'
     expect(replies.last).to eq("pacone: http://one\npactwo: http://two")
   end
+
 end
