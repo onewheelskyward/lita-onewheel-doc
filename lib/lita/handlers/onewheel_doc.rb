@@ -30,12 +30,7 @@ module Lita
       def command_fetch_key(response)
         key = response.matches[0][0]
 
-        reply = redis.hget(REDIS_KEY, key)
-
-        # If we didn't find an exact key, perform a substring match
-        if reply.nil?
-          reply = get_values_that_start_with_key(key)
-        end
+        reply = get_values_that_start_with_key(key)
         response.reply reply
       end
 
