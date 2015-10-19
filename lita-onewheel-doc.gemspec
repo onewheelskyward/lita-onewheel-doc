@@ -1,12 +1,12 @@
 Gem::Specification.new do |spec|
   spec.name          = 'lita-onewheel-doc'
-  spec.version       = '2.0.0'
+  spec.version       = '2.0.1'
   spec.authors       = ['Andrew Kreps']
   spec.email         = ['andrew.kreps@gmail.com']
   spec.description   = 'Basic key/value store designed for http links.'
   spec.summary       = 'Will do it\'s best to store urls under the key specified.'
   spec.homepage      = 'https://github.com/onewheelskyward/lita-onewheel-doc'
-  spec.license       = ''
+  spec.license       = 'MIT'
   spec.metadata      = { 'lita_plugin_type' => 'handler' }
 
   spec.files         = `git ls-files`.split($/)
