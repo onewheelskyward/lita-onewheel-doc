@@ -22,12 +22,12 @@ gem "lita-onewheel-doc"
 Just needs redis which you have because you're already running Lita.
 
 ## Usage
-Command                 | Description
------------------------ | -------------
-!doc key https://value  | Stores https://value under the key key.  Note, web links are not enforced.  You can store emoji if you like.
-!doc key                | Find all documents starting with, or equal to key.
-!doc                    | list all keys.
-!docdel key             | Remove key from the store.
+Command                   | Description
+------------------------- | -------------
+`!doc key https://value`  | Stores https://value under the key key.  Note, web links are not enforced.  You can store emoji if you like.
+`!doc key`                | Find all documents starting with, or equal to key.
+`!doc`                    | list all keys.
+`!docdel key`             | Remove key from the store.
 
 ## To be implemented
 
