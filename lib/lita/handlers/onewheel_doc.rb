@@ -19,6 +19,11 @@ module Lita
             :command_fetch_key,
             command: true,
             help: {'!doc key        ' => 'fetch the value for key_val'}
+      route /^docsearch\s+(\w+)$/,
+            :command_search_key,
+            command: true,
+            help: {'!docsearch key        ' => 'fetch values that contain key substring'}
+
 
       def command_add_key(response)
         key = response.matches[0][0]
@@ -31,6 +36,13 @@ module Lita
         key = response.matches[0][0]
 
         reply = get_values_that_start_with_key(key)
+        response.reply reply
+      end
+
+      def command_search_key(response)
+        key = response.matches[0][0]
+
+        reply = get_values_by_substring(key)
         response.reply reply
       end
 
@@ -55,6 +67,17 @@ module Lita
         all = redis.hgetall(REDIS_KEY)
         all.each do |all_key, all_val|
           if all_key =~ /^#{key}/
+            values.push format_key_val_response(all_key, all_val)
+          end
+        end
+        reply = values.join "\n"
+      end
+
+      def get_values_by_substring(key)
+        values = []
+        all = redis.hgetall(REDIS_KEY)
+        all.each do |all_key, all_val|
+          if all_key =~ /#{key}/i
             values.push format_key_val_response(all_key, all_val)
           end
         end
