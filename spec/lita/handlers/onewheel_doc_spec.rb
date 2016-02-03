@@ -6,10 +6,20 @@ describe Lita::Handlers::OnewheelDoc, lita_handler: true do
     expect(replies.last).to eq('Documented one as http://one')
   end
 
-  it 'gets a document' do
+  it 'gets a document by beginning of string' do
     send_command 'doc one http://one'
+    send_command 'doc oneandonly http://oneandonly'
+    send_command 'doc onlytheone http://onlytheone'
     send_command 'doc one'
-    expect(replies.last).to eq('one: http://one')
+    expect(replies.last).to eq("one: http://one\noneandonly: http://oneandonly")
+  end
+
+  it 'gets a document by substring' do
+    send_command 'doc one http://one'
+    send_command 'doc oneandonly http://oneandonly'
+    send_command 'doc onlytheone http://onlytheone'
+    send_command 'docsearch one'
+    expect(replies.last).to eq("one: http://one\noneandonly: http://oneandonly\nonlytheone: http://onlytheone")
   end
 
   it 'lists documents' do
