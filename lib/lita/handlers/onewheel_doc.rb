@@ -10,7 +10,7 @@ module Lita
       route /^doc\s+([\w\/+_-]+)\s+(.*)$/,
             :command_add_key,
             command: true,
-            help: {'!doc key http://' => 'Add a key using key_val and the http link'}
+            help: {'!doc key value' => 'Add a document key which references value'}
       route /^doc$/,
             :command_list_keys,
             command: true,
@@ -18,7 +18,7 @@ module Lita
       route /^doc\s+(\w+)$/,
             :command_fetch_key,
             command: true,
-            help: {'!doc key        ' => 'fetch the value for key_val'}
+            help: {'!doc key        ' => 'fetch the value for key'}
 
       def command_add_key(response)
         key = response.matches[0][0]
