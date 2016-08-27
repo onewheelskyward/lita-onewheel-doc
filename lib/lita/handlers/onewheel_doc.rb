@@ -30,7 +30,7 @@ module Lita
       def command_fetch_key(response)
         key = response.matches[0][0]
 
-        reply = get_values_that_start_with_key(key)
+        reply = search_for_key(key)
         response.reply reply
       end
 
@@ -50,15 +50,15 @@ module Lita
         response.reply "Document deleted: #{key}"
       end
 
-      def get_values_that_start_with_key(key)
+      def search_for_key(key)
         values = []
         all = redis.hgetall(REDIS_KEY)
         all.each do |all_key, all_val|
-          if all_key =~ /^#{key}/
+          if all_key =~ /#{key}/
             values.push format_key_val_response(all_key, all_val)
           end
         end
-        reply = values.join "\n"
+        values.join "\n"
       end
 
       def format_key_val_response(all_key, all_val)

@@ -37,4 +37,10 @@ describe Lita::Handlers::OnewheelDoc, lita_handler: true do
     expect(replies.last).to eq("pacone: http://one\npactwo: http://two")
   end
 
+  it 'finds by partial key middle-out' do
+    send_command 'doc pacone http://one'
+    send_command 'doc pactwo http://two'
+    send_command 'doc act'
+    expect(replies.last).to eq('pactwo: http://two')
+  end
 end
